@@ -16,7 +16,7 @@
 
 
 > Currently it is necessary to clone our repository in the machine, but soon we will solve this (ಥ﹏ಥ)
-1. Download a [of the repository](https://github.com/thaisribeiro/DotCode).
+1. Download a [of the repository](https://github.com/SoftboxLab/DotCode).
 3. Clone to the folder of your choice
 4. Copy and paste the following line into the Terminal, and press `Enter`:
 
