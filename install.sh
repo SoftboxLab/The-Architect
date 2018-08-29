@@ -25,7 +25,6 @@ if [[ $? -eq 0 ]];then
         code --install-extension PKief.material-icon-theme
         code --install-extension EQuimper.react-native-react-redux
         code --install-extension humao.rest-client
-        code --install-extension ftsamoyed.theme-pink-cat-boo
         code --install-extension octref.vetur
         code --install-extension pranaygp.vscode-css-peek
         code --install-extension PeterJausovec.vscode-docker
@@ -36,6 +35,8 @@ if [[ $? -eq 0 ]];then
         code --install-extension vsmobile.vscode-react-native
         code --install-extension chenxsan.vscode-standardjs
         code --install-extension ms-vsliveshare.vsliveshare
+        code --install-extension kortina.run-in-terminal
+
 
         ok "I said it would be fast! Now just restart the VSCode."
     else
@@ -48,10 +49,21 @@ if [[ $? -eq 0 ]];then
         if [[ $backupresponse =~ ^(n|no|N) ]];then
             ok "Settings can not be installed, but no problem, we'll be waiting for you later!"
         else
-            cp $HOME/.config/Code/User/settings.json $HOME/.config/Code/User/settings.backup.json
-            ok "You have not lost anything, the previous settings are saved in: $HOME/.config/Code/User/settings.backup.json"
+            if [ -e $HOME/.config/Code/User/settings.json ];then
+                cp $HOME/.config/Code/User/settings.json $HOME/.config/Code/User/settings.backup.json
+            fi
+            if [ ! -e $HOME/.config/Code/User/settings.json ];then
+                cp ./VSCode/settings.json $HOME/.config/Code/User/settings.json
+            fi
+            if [ -e $HOME/.config/Code/User/keybindings.json ];then
+                sed -i '$ d' $HOME/.config/Code/User/keybindings.json
+                echo ',{"key": "ctrl+alt+f","command": "runInTerminal.run", "args": {"cmd": "node_modules/.bin/eslint --fix ${relativeFile}", "match": ".*"}}]' >>  $HOME/.config/Code/User/keybindings.json
+            fi
+            if [ ! -e $HOME/.config/Code/User/keybindings.json ];then
+                cp ./VSCode/keybindings.json $HOME/.config/Code/User/keybindings.json
+            fi
         fi
-        cp ./settings.json $HOME/.config/Code/User/settings.json
+       
 
         ok "Wow, your settings have been saved now just restart the VSCode!"
     else
