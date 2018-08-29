@@ -1,0 +1,21 @@
+{
+    "workbench.colorTheme": "Pink Cat Boo",
+    "workbench.iconTheme": "material-icon-theme",
+    "npm.enableScriptExplorer": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.host": "localhost",
+    "editor.tabSize": 2,
+    "emmet.includeLanguages": {
+        "vue": "html",
+        "vue-html": "html",
+        "javascript": "javascriptreact",
+        "markdown": "html"
+      },
+      "emmet.showAbbreviationSuggestions": true,
+      "emmet.showExpandedAbbreviation": "always",
+      "emmet.triggerExpansionOnTab": true,
+      "files.autoSave": "onFocusChange",
+      "files.exclude": {
+        ".tmp": true
+      }
+}
