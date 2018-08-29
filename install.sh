@@ -7,13 +7,13 @@ source ./lib.sh
 
 awesome_header
 
-bot "Instalando extensões de código do Visual Studio e config."
+bot "From that moment you will see the magic happening!"
 
 code -v > /dev/null
 if [[ $? -eq 0 ]];then
     read -r -p "Ready to install VSCode extensions? I swear it's quick! [y|N] " configresponse
     if [[ $configresponse =~ ^(y|yes|Y) ]];then
-        ok "We're installing, get some coffee ( ͡~ ͜ʖ ͡°)"
+        ok "We're installing, get some coffee c[_]"
         code --install-extension formulahendry.auto-close-tag
         code --install-extension formulahendry.auto-rename-tag
         code --install-extension msjsdiag.debugger-for-chrome
@@ -43,29 +43,40 @@ if [[ $? -eq 0 ]];then
         ok "Extensions can not be installed, but no problem, we'll be waiting for you later!";
     fi
 
-    read -r -p "Are we going to install the settings? [y|N] " configresponse
-    if [[ $configresponse =~ ^(y|yes|Y) ]];then
-        read -r -p "Next, so you do not miss anything you want to back up? [Y|n] " backupresponse
-        if [[ $backupresponse =~ ^(n|no|N) ]];then
-            ok "Settings can not be installed, but no problem, we'll be waiting for you later!"
-        else
-            if [ -e $HOME/.config/Code/User/settings.json ];then
-                cp $HOME/.config/Code/User/settings.json $HOME/.config/Code/User/settings.backup.json
+    read -r -p "Are we going to install the settings? [y|n] " configresponse
+    if [[ $configresponse =~ ^(y|yes|Y) ]];then   
+        read -r -p "And then my paladin wants to choose the MAC? [y|n]" macresponse
+         if [[ $macresponse =~ ^(y|yes|Y) ]];then
+            read -r -p "Next, so you do not miss anything you want to back up? [y|n] " backupresponse
+            if [[ $backupresponse =~ ^(n|no|N) ]];then
+                ok "Settings can not be installed, but no problem, we'll be waiting for you later!"
+            else
+                cp $HOME/Library/Application Support/Code/User/settings.json $HOME/Library/Application Support/Code/User/settings.backup.json
+                ok "You have not lost anything, the previous settings are saved in: $HOME/Library/Application Support/Code/User/settings.bakup.json"
             fi
-            if [ ! -e $HOME/.config/Code/User/settings.json ];then
-                cp ./VSCode/settings.json $HOME/.config/Code/User/settings.json
-            fi
-            if [ -e $HOME/.config/Code/User/keybindings.json ];then
-                sed -i '$ d' $HOME/.config/Code/User/keybindings.json
-                echo ',{"key": "ctrl+alt+f","command": "runInTerminal.run", "args": {"cmd": "node_modules/.bin/eslint --fix ${relativeFile}", "match": ".*"}}]' >>  $HOME/.config/Code/User/keybindings.json
-            fi
-            if [ ! -e $HOME/.config/Code/User/keybindings.json ];then
-                cp ./VSCode/keybindings.json $HOME/.config/Code/User/keybindings.json
-            fi
-        fi
-       
+            cp ./settings.json $HOME/Library/Application Support/Code/User/settings.json
 
-        ok "Wow, your settings have been saved now just restart the VSCode!"
+            ok "Wow, your settings have been saved now just restart the VSCode!"
+         else
+            read -r -p "Next, so you do not miss anything you want to back up? [Y|n] " backupresponse
+            if [[ $backupresponse =~ ^(n|no|N) ]];then
+                ok "Settings can not be installed, but no problem, we'll be waiting for you later!"
+            else
+                if [ -e $HOME/.config/Code/User/settings.json ];then
+                    cp $HOME/.config/Code/User/settings.json $HOME/.config/Code/User/settings.backup.json
+                fi
+                if [ ! -e $HOME/.config/Code/User/settings.json ];then
+                    cp ./VSCode/settings.json $HOME/.config/Code/User/settings.json
+                fi
+                if [ -e $HOME/.config/Code/User/keybindings.json ];then
+                    sed -i '$ d' $HOME/.config/Code/User/keybindings.json
+                    echo ',{"key": "ctrl+alt+f","command": "runInTerminal.run", "args": {"cmd": "node_modules/.bin/eslint --fix ${relativeFile}", "match": ".*"}}]' >>  $HOME/.config/Code/User/keybindings.json
+                fi
+                if [ ! -e $HOME/.config/Code/User/keybindings.json ];then
+                    cp ./VSCode/keybindings.json $HOME/.config/Code/User/keybindings.json
+                fi
+            fi
+         fi
     else
         ok "Ok, nothing to install settings, I get it!";
     fi
@@ -74,3 +85,5 @@ else
     error "Make sure your Visual Studio Code is installed!"
     error "Any questions, read here: https://code.visualstudio.com/docs/setup/linux"
 fi
+
+footer
