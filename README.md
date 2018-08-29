@@ -36,6 +36,9 @@ This command will install all of the extensions listed below in your IDE, that's
 
 You can back up your previous settings by answering yes and then accepting the new settings
 
+
+![Demo](https://media.giphy.com/media/vgx6eyNYlaEceW7Zu0/giphy.gif)
+
 ## Useful Extensions
 
 - “Auto Close Tag e Auto Rename Tag”
