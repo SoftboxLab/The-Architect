@@ -1,15 +1,19 @@
-import inquirer from 'inquirer'
+const inquirer = requirer('inquirer')
 
 export default {
   installExtensions: () => {
-    const frameworks = ['vue', 'react']
-    const questions = {
-      type: 'checkbox-plus',
+    const extensions = ['vue', 'react']
+
+    const questions = [{
+      type: 'checkbox',
       name: 'extensions',
-      message: `Speak my consecrated, we have here a package of
-      extensions for your VSCode,choose your frameworks
-      to have an idea of ​​what will be suitable for you`,
+      message: `Select frameworks to help you download the best extensions:`,
+      choices: extensions,
       default: ['vue']
-    }
+    }]
+
+    return inquirer.prompt(questions)
   }
+
+
 }
